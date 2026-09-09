@@ -52,7 +52,7 @@ function utm(chave) {
   }
 }
 
-const WHATSAPP_GROUP = "https://wa.me/5581997076388?text=Ol%C3%A1,%20gostaria%20de%20falar%20sobre%20o%20Col%C3%A9gio%20Cppem";
+const WHATSAPP_GROUP = "https://wa.me/558194086174?text=Ol%C3%A1,%20gostaria%20de%20falar%20sobre%20o%20Col%C3%A9gio%20Cppem.";
 
 /* Tempo antes de redirecionar. A conversão da PixelX é assíncrona (debounce de
    ~1500 ms); navegar antes disso cancela a requisição e o Lead se perde,

@@ -472,7 +472,13 @@
       animation:notice-fly 4.2s ease-in-out infinite;
       will-change:transform;
     }
-    .notice__badge svg{width:28px;height:28px;color:var(--gold-light)}
+    .notice__badge__icon{
+      display:flex;align-items:center;justify-content:center;
+      width:28px;height:28px;
+      overflow:hidden;
+      color:var(--gold-light);
+    }
+    .notice__badge__icon svg{display:block;width:100%;height:100%}
     .notice__badge::before{
       content:'';
       position:absolute;inset:-16px;
@@ -1372,10 +1378,12 @@
   <div class="notice">
     <div class="notice__box">
       <div class="notice__badge" aria-hidden="true">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M3 11.5 12 4l9 7.5" />
-          <path d="M5 10v9a1 1 0 0 0 1 1h4v-6h4v6h4a1 1 0 0 0 1-1v-9" />
-        </svg>
+        <span class="notice__badge__icon">
+          <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M3 11.5 12 4l9 7.5" />
+            <path d="M5 10v9a1 1 0 0 0 1 1h4v-6h4v6h4a1 1 0 0 0 1-1v-9" />
+          </svg>
+        </span>
       </div>
       <span class="notice__tag">Novidade</span>
       <p class="notice__title">

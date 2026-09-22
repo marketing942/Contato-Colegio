@@ -420,6 +420,7 @@
       margin:72px auto 84px;
       padding:0 22px;
       position:relative;
+      z-index:0;
     }
     /* halo dourado atrás do card, ecoa o glow do emblema */
     .notice::before{
@@ -439,24 +440,16 @@
       padding:52px 28px 34px;
       text-align:center;
       box-shadow:0 26px 60px rgba(5,10,28,.5), 0 0 40px rgba(201,162,39,0.1);
-      overflow:hidden;
-    }
-    /* linha de brilho no topo */
-    .notice__box::before{
-      content:'';position:absolute;top:0;left:50%;transform:translateX(-50%);
-      width:70%;height:1px;
-      background:linear-gradient(90deg,transparent,rgba(201,162,39,.8),transparent);
     }
     /* cantos dourados em L, iguais ao card do formulário */
+    .notice__box::before,
     .notice__box::after{
-      content:'';position:absolute;inset:0;pointer-events:none;
-      background:
-        linear-gradient(var(--gold),var(--gold)) top left/16px 2px no-repeat,
-        linear-gradient(var(--gold),var(--gold)) top left/2px 16px no-repeat,
-        linear-gradient(var(--gold),var(--gold)) bottom right/16px 2px no-repeat,
-        linear-gradient(var(--gold),var(--gold)) bottom right/2px 16px no-repeat;
-      opacity:.75;
+      content:'';position:absolute;width:22px;height:22px;
+      border-color:var(--gold);border-style:solid;opacity:.8;
+      pointer-events:none;
     }
+    .notice__box::before{top:-1px;left:-1px;border-width:2px 0 0 2px;border-radius:20px 0 0 0}
+    .notice__box::after{bottom:-1px;right:-1px;border-width:0 2px 2px 0;border-radius:0 0 20px 0}
 
     /* selo flutuante — "voando" acima do card */
     .notice__badge{
@@ -546,15 +539,20 @@
     .notice__cta span{position:relative;z-index:1}
     .notice__cta::after{
       content:'';
-      position:absolute;top:0;left:-60%;
-      width:45%;height:100%;
-      background:linear-gradient(115deg,transparent,rgba(255,255,255,.75),transparent);
-      transform:skewX(-18deg);
-      animation:cta-shine 2.8s ease-in-out infinite;
+      position:absolute;top:-20%;left:-75%;
+      width:55%;height:140%;
+      background:linear-gradient(90deg,
+        rgba(255,255,255,0) 0%,
+        rgba(255,255,255,.35) 35%,
+        rgba(255,255,255,.95) 50%,
+        rgba(255,255,255,.35) 65%,
+        rgba(255,255,255,0) 100%);
+      transform:skewX(-22deg);
+      animation:cta-shine 3.2s ease-in-out infinite;
     }
     @keyframes cta-shine{
-      0%{left:-60%}
-      55%,100%{left:135%}
+      0%,8%{left:-75%}
+      45%,100%{left:150%}
     }
     .notice__cta:hover{transform:translateY(-2px);box-shadow:0 16px 34px rgba(201,162,39,.5)}
     .notice__cta:active{transform:translateY(0)}

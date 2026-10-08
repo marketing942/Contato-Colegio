@@ -309,20 +309,6 @@
     .f-list a:hover{color:var(--gold-300)}
     .footer-base{display:flex;flex-wrap:wrap;justify-content:space-between;gap:8px;padding:18px 0 22px;border-top:1px solid rgb(255 255 255/.08);font-size:12px;color:rgb(220 235 255/.5)}
 
-    /* ---------- widget flutuante: nova sede ---------- */
-    .float-widget{position:fixed;right:20px;bottom:20px;z-index:60;display:flex;flex-direction:column;align-items:flex-end;gap:12px}
-    .float-btn{position:relative;display:grid;place-items:center;width:62px;height:62px;border-radius:50%;color:var(--navy-950);background:linear-gradient(180deg,var(--gold-300),var(--gold) 55%,var(--gold-600));box-shadow:0 14px 30px -8px rgb(242 176 30/.75),0 0 0 4px var(--white);transition:transform .2s}
-    .float-btn:hover{transform:scale(1.06)}
-    .float-btn::before{content:"";position:absolute;inset:0;border-radius:50%;background:rgb(242 176 30/.45);animation:ping 2.2s cubic-bezier(0,0,.2,1) infinite}
-    .float-btn svg{position:relative;width:28px;height:28px}
-    .float-bubble{position:relative;max-width:min(16rem,calc(100vw - 6rem));padding:14px 36px 14px 16px;border-radius:18px 18px 6px 18px;background:var(--white);box-shadow:0 18px 40px -14px rgb(6 22 58/.55);outline:1px solid var(--blue-100);opacity:0;transform:translateY(10px) scale(.95);transform-origin:bottom right;pointer-events:none;transition:opacity .3s,transform .3s}
-    .float-bubble.show{opacity:1;transform:none;pointer-events:auto}
-    .float-bubble__close{position:absolute;top:6px;right:6px;display:grid;place-items:center;width:24px;height:24px;border:0;border-radius:50%;background:none;color:var(--muted);font-size:16px;line-height:1;cursor:pointer}
-    .float-bubble__close:hover{background:var(--blue-50);color:var(--navy)}
-    .float-bubble__text{margin-bottom:10px;font-family:var(--font-display);font-size:14px;font-weight:800;line-height:1.3;color:var(--navy)}
-    .float-bubble__text strong{color:var(--gold-700)}
-    .float-bubble__cta{display:inline-block;padding:8px 14px;border-radius:999px;font-family:var(--font-display);font-size:13px;font-weight:900;color:var(--navy-950);background:linear-gradient(180deg,var(--gold-300),var(--gold))}
-
     /* ---------- entrada suave (só CSS: sem JS novo na página) ---------- */
     @supports (animation-timeline:view()){
       .reveal{animation:reveal-in linear both;animation-timeline:view();animation-range:entry 0% entry 40%}
@@ -364,8 +350,6 @@
       .campus-photo img{aspect-ratio:16/9;object-position:18% center}
       .footer-grid{grid-template-columns:1fr}
       .final-box .btn{width:100%}
-      .float-widget{right:14px;bottom:14px}
-      .float-btn{width:54px;height:54px}
       .video-play{width:52px;height:52px;right:12px;bottom:10px}
       .video-play svg{width:24px;height:24px}
       }
@@ -380,7 +364,7 @@
     @media (prefers-reduced-motion:reduce){
       html{scroll-behavior:auto}
       .reveal{animation:none}
-      .light-orbs i,.p-circle .ring,.p-circle .mascot,.final-mascots img,.badge .dot::after,.float-btn::before,.video-play::before{animation:none}
+      .light-orbs i,.p-circle .ring,.p-circle .mascot,.final-mascots img,.badge .dot::after,.video-play::before{animation:none}
       .depos__row,.marquee-track{animation:none}
       .depos,.marquee{overflow-x:auto}
     }
@@ -744,67 +728,7 @@
     </div>
   </footer>
 
-  <!-- ===== WIDGET FLUTUANTE — NOVA SEDE =====
-       Botão fixo + balão que reaparece periodicamente. Fechar o balão só
-       silencia esta aba (sessionStorage); o botão continua sempre visível. -->
-  <div class="float-widget" id="floatWidget">
-    <div class="float-bubble" id="floatBubble" role="status" aria-live="polite">
-      <button type="button" class="float-bubble__close" id="floatBubbleClose" aria-label="Fechar aviso">&times;</button>
-      <p class="float-bubble__text">Conheça a <strong>nova sede</strong> do Colégio CPPEM! 🏫</p>
-      <a class="float-bubble__cta" href="https://novasede.cppem.com.br" target="_blank" rel="noopener">Ver agora</a>
-    </div>
-    <a class="float-btn" href="https://novasede.cppem.com.br" target="_blank" rel="noopener" aria-label="Conheça a nova sede do Colégio CPPEM">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
-        <path d="M3 11.5 12 4l9 7.5" />
-        <path d="M5 10v9a1 1 0 0 0 1 1h4v-6h4v6h4a1 1 0 0 0 1-1v-9" />
-      </svg>
-    </a>
-  </div>
 
-  <script>
-    (function(){
-      var bubble = document.getElementById('floatBubble');
-      var closeBtn = document.getElementById('floatBubbleClose');
-      if(!bubble || !closeBtn) return;
-
-      var DISMISS_KEY = 'cppem_novasede_bubble_dismissed';
-      var FIRST_DELAY = 4000;   // primeiro aparecimento
-      var VISIBLE_FOR = 9000;   // tempo visível
-      var REPEAT_EVERY = 30000; // intervalo entre aparições
-
-      var dismissed = false;
-      try { dismissed = sessionStorage.getItem(DISMISS_KEY) === '1'; } catch(e) {}
-
-      var hideTimer = null;
-      var cycleTimer = null;
-
-      function showBubble(){
-        if(dismissed) return;
-        bubble.classList.add('show');
-        clearTimeout(hideTimer);
-        hideTimer = setTimeout(hideBubble, VISIBLE_FOR);
-      }
-      function hideBubble(){
-        bubble.classList.remove('show');
-      }
-      function scheduleCycle(){
-        clearInterval(cycleTimer);
-        cycleTimer = setInterval(showBubble, REPEAT_EVERY);
-      }
-
-      closeBtn.addEventListener('click', function(){
-        hideBubble();
-        dismissed = true;
-        clearInterval(cycleTimer);
-        try { sessionStorage.setItem(DISMISS_KEY, '1'); } catch(e) {}
-      });
-
-      setTimeout(function(){
-        showBubble();
-        scheduleCycle();
-      }, FIRST_DELAY);
-    })();
-  </script>
 
   <script>
     /* Vídeo: troca a capa pelo player só no clique. Script separado do

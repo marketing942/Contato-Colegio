@@ -214,6 +214,13 @@
     .video-grid{display:grid;grid-template-columns:.8fr 1.2fr;gap:48px;align-items:center}
     .video-frame{position:relative;aspect-ratio:16/9;border-radius:24px;overflow:hidden;background:var(--navy-950);box-shadow:0 30px 60px -28px rgb(6 22 58/.7);outline:4px solid var(--white)}
     .video-frame iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+    .video-poster{position:absolute;inset:0;display:block;width:100%;height:100%;padding:0;border:0;cursor:pointer;background:var(--navy-950)}
+    .video-poster img{width:100%;height:100%;object-fit:cover;transition:transform .7s ease}
+    .video-poster:hover img{transform:scale(1.04)}
+        .video-play{position:absolute;right:18px;bottom:14px;z-index:1;display:grid;place-items:center;width:68px;height:68px;border-radius:50%;color:var(--navy-950);background:linear-gradient(180deg,var(--gold-300),var(--gold) 55%,var(--gold-600));box-shadow:0 0 0 1px rgb(255 255 255/.3) inset,0 14px 34px -8px rgb(242 176 30/.8);transition:transform .2s}
+    .video-play::before{content:"";position:absolute;inset:0;border-radius:50%;background:rgb(242 176 30/.5);animation:ping 2s cubic-bezier(0,0,.2,1) infinite}
+    .video-play svg{position:relative;width:30px;height:30px;margin-left:4px;fill:currentColor}
+    .video-poster:hover .video-play{transform:scale(1.08)}
     .video-wrap{position:relative}
     .video-wrap::before{content:"";position:absolute;inset:-18px -18px 24px 24px;z-index:-1;border-radius:30px;background:linear-gradient(135deg,var(--blue-200),var(--blue-400));opacity:.55}
     .checks{display:grid;gap:10px;margin-top:20px}
@@ -359,7 +366,9 @@
       .final-box .btn{width:100%}
       .float-widget{right:14px;bottom:14px}
       .float-btn{width:54px;height:54px}
-    }
+      .video-play{width:52px;height:52px;right:12px;bottom:10px}
+      .video-play svg{width:24px;height:24px}
+      }
     @media (max-width:520px){
       .facts ul{grid-template-columns:1fr}
       .facts li+li{border-left:0;border-top:1px solid rgb(255 255 255/.08)}
@@ -371,7 +380,7 @@
     @media (prefers-reduced-motion:reduce){
       html{scroll-behavior:auto}
       .reveal{animation:none}
-      .light-orbs i,.p-circle .ring,.p-circle .mascot,.final-mascots img,.badge .dot::after,.float-btn::before{animation:none}
+      .light-orbs i,.p-circle .ring,.p-circle .mascot,.final-mascots img,.badge .dot::after,.float-btn::before,.video-play::before{animation:none}
       .depos__row,.marquee-track{animation:none}
       .depos,.marquee{overflow-x:auto}
     }
@@ -498,14 +507,12 @@
           </ul>
         </div>
         <div class="video-wrap reveal">
+          <!-- capa até o clique: o player do YouTube só carrega quando a pessoa decide assistir -->
           <div class="video-frame">
-            <iframe
-              src="https://www.youtube.com/embed/0FoAumYuwcM?autoplay=1&mute=1&playsinline=1&rel=0"
-              title="Apresentação do Colégio CPPEM"
-              allow="autoplay; encrypted-media; picture-in-picture"
-              allowfullscreen
-              loading="lazy"
-            ></iframe>
+            <button type="button" class="video-poster" data-video="0FoAumYuwcM" aria-label="Assistir ao vídeo institucional do Colégio CPPEM">
+              <img src="public/img/video-capa.webp" alt="" width="1280" height="720" loading="lazy" />
+              <span class="video-play" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8 5.14v13.72a1 1 0 0 0 1.52.85l10.78-6.86a1 1 0 0 0 0-1.7L9.52 4.29A1 1 0 0 0 8 5.14Z"/></svg></span>
+            </button>
           </div>
         </div>
       </div>
@@ -796,6 +803,23 @@
         showBubble();
         scheduleCycle();
       }, FIRST_DELAY);
+    })();
+  </script>
+
+  <script>
+    /* Vídeo: troca a capa pelo player só no clique. Script separado do
+       formulário, para um erro aqui nunca afetar o envio do lead. */
+    (function(){
+      var poster = document.querySelector('.video-poster');
+      if(!poster) return;
+      poster.addEventListener('click', function(){
+        var iframe = document.createElement('iframe');
+        iframe.src = 'https://www.youtube-nocookie.com/embed/' + poster.getAttribute('data-video') + '?autoplay=1&rel=0&playsinline=1';
+        iframe.title = 'Apresentação do Colégio CPPEM';
+        iframe.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share';
+        iframe.allowFullscreen = true;
+        poster.replaceWith(iframe);
+      });
     })();
   </script>
 

@@ -8,7 +8,7 @@ Relatório consolidado do ecossistema: [RELATORIO-GERAL-SEO-ECOSSISTEMA.md](RELA
 ## 0 a 30 dias — correções e quick wins
 
 - **Concluído** — Title, description, School JSON-LD, robots
-- **Proposto** — Informar o domínio → canonical, og:url, og:image e sitemap
+- **Concluído** — Domínio aplicado → canonical, og:url, og:image e sitemap
 - **Proposto** — Google Business Profile com o mesmo NAP
 
 ## 31 a 60 dias — expansão semântica e ajustes por dados

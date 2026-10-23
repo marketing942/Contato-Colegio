@@ -5,7 +5,7 @@ Relatório consolidado do ecossistema: [RELATORIO-GERAL-SEO-ECOSSISTEMA.md](RELA
 
 ## Arquitetura
 
-- **Domínio de produção:** não identificado com certeza (padrão `colegio*.cppem.com.br`) — evidência: o Apps Script reconhece `//colegio[a-z0-9.-]*\.cppem\.com\.br` — o host exato não aparece no código.
+- **Domínio de produção:** contato.colegio.cppem.com.br — evidência: informado pelo responsável em 23/10/2026 (o Apps Script só reconhece hosts que começam com `colegio`; esta página é identificada pelo `?aba=COLEGIO`).
 - **Stack:** HTML + CSS (inline) + JavaScript estáticos. Vercel. Fontes do Google (Nunito, Nunito Sans). Vídeo YouTube (nocookie) sob clique.
 - **Renderização:** HTML estático com todo o conteúdo no HTML inicial.
 
@@ -31,7 +31,7 @@ Gravidade: **P0** crítico (indexação/integridade) · **P1** alto impacto · *
 | Sev. | Problema | Evidência | Impacto | Status |
 |---|---|---|---|---|
 | P1 | Title sem termo de busca | `Colégio CPPEM — Fale com a gente` | Não aparece para "escola cristã/militarizada em Caruaru" | Corrigido |
-| P1 | Domínio final desconhecido | Sem canonical, `og:url`, `og:image` | Duplicação com `*.vercel.app`; preview sem imagem | Pendente (informar o domínio) |
+| P1 | Sem canonical, og:url e og:image | Ausentes | Duplicação com `*.vercel.app`; preview sem imagem | Corrigido (contato.colegio.cppem.com.br; imagem recortada do hero) |
 | P1 | Sem dados estruturados de escola |  | Google sem endereço/telefone da entidade nesta página | Corrigido (School) |
 | P2 | Imagens maiores que o exibido | Lighthouse: ~1,9 MB de economia possível em celular (pilares, depoimentos PNG, fotos) | Peso/LCP | Recomendado (precisa medir o tamanho exibido de cada uma) |
 | P2 | Dois endereços | Rodapé: Praça Presidente Getúlio Vargas, 119 (atual) e Rodovia PE-095, 562 (nova sede) | NAP inconsistente quando houver a mudança | Documentado (JSON-LD usa o atual) |

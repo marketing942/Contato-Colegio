@@ -55,7 +55,7 @@ URL por intenção.
 
 | Intenção / busca | URL que deve responder | Situação |
 |---|---|---|
-| Colégio CPPEM / escola cristã e militarizada em Caruaru | esta página (domínio a informar) | Implementado |
+| Colégio CPPEM / escola cristã e militarizada em Caruaru | contato.colegio.cppem.com.br | Implementado |
 | colégio militar Caruaru | não mirar diretamente | Risco de intenção errada |
 
 ## Estratégia da página

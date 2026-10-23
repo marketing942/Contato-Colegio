@@ -21,7 +21,10 @@ Extraídos do HTML renderizado localmente (Playwright/HTTP), antes e depois.
 |---|---|---|
 | `title` | Colégio CPPEM — Fale com a gente | Colégio CPPEM em Caruaru-PE: Escola Cristã e Militarizada |
 | `description` | Colégio CPPEM em Caruaru-PE: escola cristã, militarizada e preparatória. Deixe seus dados e nossa equipe fala com você. | Matrículas 2027 abertas no Colégio CPPEM, escola cristã, militarizada e preparatória em Caruaru-PE, do 1º ano do Fundamental ao 3º ano do Médio. Fale conosco. |
+| `canonical` | — | https://contato.colegio.cppem.com.br/ |
 | `robots` | — | index, follow, max-image-preview:large |
+| `og:image` | — | https://contato.colegio.cppem.com.br/public/img/og-colegio-cppem.jpg |
+| `og:url` | — | https://contato.colegio.cppem.com.br/ |
 | `og:type` | — | website |
 | `og:site_name` | — | Colégio CPPEM |
 | `og:locale` | — | pt_BR |
